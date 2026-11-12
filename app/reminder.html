@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self'; style-src 'self'" />
+    <title>Water Reminder</title>
+    <link rel="stylesheet" href="reminder.css" />
+  </head>
+  <body>
+    <div class="scene" id="scene">
+      <div class="bubble hit" id="bubble">
+        <p class="bubble-title" id="title"></p>
+        <p class="bubble-sub" id="sub"></p>
+      </div>
+
+      <div class="stage hit" id="stage">
+        <img class="frame" id="frameA" alt="" />
+        <img class="frame" id="frameB" alt="" />
+      </div>
+
+      <div class="actions" id="askActions">
+        <button class="btn primary hit" id="drankBtn">💧 Yes, I drank water</button>
+        <button class="btn secondary hit" id="snoozeBtn">⏰ Snooze 10 min</button>
+      </div>
+
+      <div class="actions hidden" id="doneActions">
+        <button class="btn primary hit" id="okBtn">👍 Okay</button>
+      </div>
+    </div>
+
+    <script src="reminder.js"></script>
+  </body>
+</html>

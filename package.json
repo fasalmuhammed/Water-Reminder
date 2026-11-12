@@ -1,0 +1,33 @@
+{
+  "name": "water-reminder",
+  "productName": "Water Reminder",
+  "version": "1.0.0",
+  "description": "A friendly character that pops up every 30 minutes to remind you to drink water.",
+  "main": "app/main.js",
+  "scripts": {
+    "start": "electron .",
+    "test-mode": "electron . --test",
+    "dist": "electron-builder --win"
+  },
+  "build": {
+    "appId": "in.finprov.waterreminder",
+    "productName": "Water Reminder",
+    "files": [
+      "app/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "app/assets/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true
+    }
+  },
+  "devDependencies": {
+    "electron": "^45.2.1",
+    "electron-builder": "^26.18.0"
+  }
+}

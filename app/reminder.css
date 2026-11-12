@@ -1,0 +1,200 @@
+:root {
+  --water-light: #38bdf8;
+  --water: #0284c7;
+  --water-dark: #075985;
+  --ink: #0f172a;
+  --ink-soft: #475569;
+  --card: #ffffff;
+  --card-border: rgba(15, 23, 42, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  overflow: hidden;
+  user-select: none;
+  font-family: 'Segoe UI Variable Text', 'Segoe UI', system-ui, sans-serif;
+}
+
+.scene {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 14px 14px;
+  opacity: 0;
+}
+
+.scene.enter {
+  animation: enter 520ms cubic-bezier(0.34, 1.4, 0.64, 1) forwards;
+}
+
+.scene.leave {
+  animation: leave 360ms ease-in forwards;
+}
+
+@keyframes enter {
+  from { opacity: 0; transform: translateY(60px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes leave {
+  from { opacity: 1; transform: translateY(0); }
+  to   { opacity: 0; transform: translateY(60px); }
+}
+
+/* ---------- speech bubble ---------- */
+
+.bubble {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  padding: 12px 16px;
+  margin-bottom: 6px;
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: 18px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.18);
+  text-align: center;
+  transform-origin: 50% 100%;
+}
+
+.bubble::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -9px;
+  width: 18px;
+  height: 18px;
+  background: var(--card);
+  border-right: 1px solid var(--card-border);
+  border-bottom: 1px solid var(--card-border);
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.bubble.pop {
+  animation: pop 380ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes pop {
+  from { transform: scale(0.6); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+
+.bubble-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.bubble-sub {
+  margin-top: 3px;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--ink-soft);
+}
+
+/* ---------- character ---------- */
+
+.stage {
+  position: relative;
+  width: 221px;
+  height: 400px;
+  flex-shrink: 0;
+}
+
+.stage.idle {
+  animation: breathe 3.2s ease-in-out infinite;
+}
+
+@keyframes breathe {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-4px); }
+}
+
+.frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0;
+  transition: opacity 170ms ease;
+  filter: drop-shadow(0 10px 14px rgba(15, 23, 42, 0.3));
+  pointer-events: none;
+}
+
+.frame.front {
+  opacity: 1;
+}
+
+/* ---------- buttons ---------- */
+
+.actions {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.actions.hidden {
+  display: none;
+}
+
+.btn {
+  flex: 1;
+  padding: 11px 10px;
+  border-radius: 14px;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 120ms ease, box-shadow 120ms ease, filter 120ms ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+  transform: none;
+}
+
+.btn:focus-visible {
+  outline: 3px solid var(--water-light);
+  outline-offset: 2px;
+}
+
+.btn.primary {
+  flex: 1.35;
+  color: #fff;
+  border: 1px solid var(--water-dark);
+  background: linear-gradient(180deg, var(--water-light), var(--water));
+  box-shadow: 0 6px 16px rgba(2, 132, 199, 0.4);
+}
+
+.btn.primary:hover {
+  filter: brightness(1.06);
+}
+
+.btn.secondary {
+  color: var(--ink);
+  border: 1px solid var(--card-border);
+  background: var(--card);
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.18);
+}
